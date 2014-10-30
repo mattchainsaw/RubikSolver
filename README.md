@@ -1,0 +1,4 @@
+RubikSolver
+===========
+
+OO Software Project

@@ -12,7 +12,7 @@ public class Face {
    *  changed to any other number.
    *  */
   public Face(int n) throws FaceException {
-    int[][] facets = new int[3][3];
+    facets = new int[3][3];
     if (n < 0 || n > 5) throw new FaceException("BAD! BAD! BAD! BAD!!!!");
     else {
       facets[1][1] = n;
@@ -22,7 +22,16 @@ public class Face {
 
   ///// Accessors /////
   
-
+  public String toString() {
+    String out = "";
+    for (int i=0; i<3; i++) {
+      for (int j=0; j<3; j++) {
+        out += facets[i][j]; 
+      }
+      if (i != 2) out += "\n";
+    }
+    return out;
+  }            
 
   ///// Mutators /////
 
@@ -30,10 +39,13 @@ public class Face {
    *  This method is used in the constructor and will serve to clean the cube for user input.
    *  */
   public void Clear() {
-    for (int i=0; i<3; i++)
-      for (int j=0; j<3; j++)
-        if (i != 1 && j != 1)
+    for (int i=0; i<3; i++) {
+      for (int j=0; j<3; j++) {
+        if (i != 1 || j != 1) {
           facets[i][j] = -1;
+        }
+      }
+    }
   }
 
   ///// Private Utilities /////
@@ -43,4 +55,3 @@ public class Face {
 
   private int[][] facets;
 }
-

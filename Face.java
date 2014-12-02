@@ -25,26 +25,23 @@ public class Face {
   public Face(int aFace) {
     blocks = new ArrayList<Integer>();
     for (int i=0; i<9; i++) {
-      if (i != 4)
-        blocks.add(-1);
-      else
-        blocks.add(aFace);
+      blocks.add(aFace);
     }
   }
 
   /**
-   * Gets the value of a position of the Face.
+   * gets the value of a position of the Face.
    * @param pos Position of blocks
    * @return Returns the value at the specified position
    */
-  public int Get(int pos) { return blocks.get(pos); }
+  public int get(int pos) { return blocks.get(pos); }
 
   /**
-   * Sets a position of the face to a value.
+   * sets a position of the face to a value.
    * @param pos Position of the Face
    * @param val Value that the position will be set to.
    */
-  public void Set(int pos, int val) { blocks.set(pos,val); }
+  public void set(int pos, int val) { blocks.set(pos,val); }
 
   /**
    * Turns the Face of the cube clockwise.

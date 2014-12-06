@@ -9,7 +9,7 @@ public class Cube implements Cloneable {
   
   ///////// Private Data /////////////
   private ArrayList<Face> cube;
-  private static Random R;
+  private transient static Random R;
   ////////////////////////////////////
 
   /**
@@ -55,10 +55,11 @@ public class Cube implements Cloneable {
    * Moves the cube randomly a certain number of moves.
    * @param moves number of random moves.
    */
-  public void move(final int moves) {
+  public String move(final int moves) {
     String s = "";
     for (int i=0; i<moves; i++) 
-      rand();
+      s += rand();
+    return s;
   }
 
   private String rand() {
@@ -91,12 +92,9 @@ public class Cube implements Cloneable {
   }
 
   // Probably will never succeed
-  public String solve() {
-    Cube c = new Cube();
-    String s = "";
-    while (!this.equals(c))
-      s += rand();
-    return s;
+  public String solve(Solvable s) {
+    String sol = s.solve(this.clone());
+    return sol;
   }
 
   /**
@@ -169,9 +167,6 @@ public class Cube implements Cloneable {
           return false;
     return true;
   }
-
-  //////////////////////////////////////////////////////////////////////////////
-
 
   // Different Operations
   // R(), L(), U(), D(), F(), B()

@@ -8,7 +8,7 @@ public class Solver {
     JFrame win = new JFrame("Rubik's Cube Solver");
     win.setLayout(new GridLayout(2,2));
     win.setLocation(100,100);
-    win.setSize(100,100);
+    win.setSize(200,200);
     /*  +--------+--------+
      *  |        | cube   |
      *  | title  | view   |
@@ -21,14 +21,20 @@ public class Solver {
      */
 
     // title
+    JPanel JP = new JPanel();
+    JP.setLayout(new FlowLayout());
+//    JP.add(new JLabel("Rubik's Cube Solver!\nBy: Matthew Meyer"));
     JLabel title = null;
-    try  {
-      title = new JLabel(new ImageIcon("../img/Rubiks.png"));
+    title = new JLabel(new ImageIcon("../img/Rubiks.png"));
+    if (title == null) 
+      title = new JLabel(new ImageIcon("./img/Rubiks.pmg"));
+    if (title == null) {
+      System.out.println("Can't find \"Rubiks.png\"");
+      System.exit(1);
     }
-    catch (Exception e) {
-      System.out.println("Can't find \"../img/Rubiks.png\"");
-    }
-    win.add(title);
+    JP.add(title);
+    JP.setVisible(true);
+    win.add(JP);
 
     // cube view
     JPanel cubeView = Input.CubePanel();

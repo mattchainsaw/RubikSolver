@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
+
 public class Input {
   
   private static Cube cube = new Cube();
@@ -34,7 +35,12 @@ public class Input {
   }
 
   public static JPanel UtilsPanel() {
-    return new JPanel();
+    JPanel ret = new JPanel();
+    ret.setLayout(new GridLayout(2,1));
+    ret.add(UtilButtons(), BorderLayout.CENTER);
+    ret.add(ColorButtons(), BorderLayout.SOUTH);
+    ret.setVisible(true);
+    return ret;
   }
 
   public static JPanel OperationsPanel() {
@@ -46,12 +52,25 @@ public class Input {
     JButton D = new JButton("D");
     JButton F = new JButton("F");
     JButton B = new JButton("B");
-    JButton r = new JButton("r");
-    JButton l = new JButton("l");
-    JButton u = new JButton("u");
-    JButton d = new JButton("d");
-    JButton f = new JButton("f");
-    JButton b = new JButton("b");
+    JButton r = new JButton("R'");
+    JButton l = new JButton("L'");
+    JButton u = new JButton("U'");
+    JButton d = new JButton("D'");
+    JButton f = new JButton("F'");
+    JButton b = new JButton("B'");
+
+    R.setFont(new Font("Arial", Font.PLAIN, 40));
+    L.setFont(new Font("Arial", Font.PLAIN, 40));
+    U.setFont(new Font("Arial", Font.PLAIN, 40));
+    D.setFont(new Font("Arial", Font.PLAIN, 40));
+    F.setFont(new Font("Arial", Font.PLAIN, 40));
+    B.setFont(new Font("Arial", Font.PLAIN, 40));
+    r.setFont(new Font("Arial", Font.PLAIN, 40));
+    l.setFont(new Font("Arial", Font.PLAIN, 40));
+    u.setFont(new Font("Arial", Font.PLAIN, 40));
+    d.setFont(new Font("Arial", Font.PLAIN, 40));
+    f.setFont(new Font("Arial", Font.PLAIN, 40));
+    b.setFont(new Font("Arial", Font.PLAIN, 40));
 
     R.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent event) {
@@ -163,6 +182,7 @@ public class Input {
     ret.setVisible(true);
     return ret;
   }
+  
   private static JButton ColorLabel(final int c, final int i) {
     final JButton box = new JButton();
     Color C = null;
@@ -183,7 +203,20 @@ public class Input {
     box.setBackground(C);
     box.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent event) {
+        Color before = box.getBackground();
         box.setBackground(color);
+        
+        if (!color.equals(FRONT) && !color.equals(TOP)   && !color.equals(BOTTOM) &&
+            !color.equals(LEFT)  && !color.equals(RIGHT) && !color.equals(BACK)) {
+          if (before.equals(FRONT)) FRONT = color;
+          if (before.equals(TOP)) TOP = color;
+          if (before.equals(BOTTOM)) BOTTOM = color;
+          if (before.equals(LEFT)) LEFT = color;
+          if (before.equals(RIGHT)) RIGHT = color;
+          if (before.equals(BACK)) BACK = color;
+          paint();
+        }
+        
         int x = 0; // default is front
         if (color.equals(TOP)) x = 1;
         if (color.equals(BOTTOM)) x = 2;
@@ -203,21 +236,71 @@ public class Input {
         int c = cube.get(i,j);
         Color C = null;
         switch (c) {
-          case 0: C = Color.red;
+          case 0: C = FRONT;
                   break;
-          case 1: C = Color.yellow;
+          case 1: C = TOP;
                   break;
-          case 2: C = Color.white;
+          case 2: C = BOTTOM;
                   break;
-          case 3: C = Color.green;
+          case 3: C = LEFT;
                   break;
-          case 4: C = Color.blue;
+          case 4: C = RIGHT;
                   break;
-          case 5: C = Color.orange;
+          case 5: C = BACK;
                   break;
         }
         buttons[i][j].setBackground(C);
       }
     }
   }
+    
+  
+  
+  private static JPanel UtilButtons() {
+    return new JPanel();
+  }
+   
+  
+  
+  private static JPanel ColorButtons() {
+    JPanel ret = new JPanel();
+    ret.setLayout(new GridLayout(2,5));
+    ret.add(cb(Color.black));
+    ret.add(cb(Color.blue));
+    ret.add(cb(Color.cyan));
+    ret.add(cb(Color.green));
+    ret.add(cb(Color.magenta));
+    ret.add(cb(Color.orange));
+    ret.add(cb(Color.pink));
+    ret.add(cb(Color.red));
+    ret.add(cb(Color.white));
+    ret.add(cb(Color.yellow));
+    ret.setVisible(true);
+    return ret;
+  }
+
+
+  private static JButton cb(final Color c) {
+    JButton jb = new JButton();
+    jb.setBackground(c);
+    jb.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent event) {
+        color = c;
+      }
+    });
+    return jb;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

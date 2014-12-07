@@ -1,11 +1,12 @@
 import java.util.ArrayList;
+import java.io.Serializable;
 
 /** 
  * Face Class.
  * @author Matthew Meyer
  */
 
-public class Face {
+public class Face implements Serializable{
   /**
    * Constructor for the Face class.
    * @param aFace Integer number denoting what side this face represents.

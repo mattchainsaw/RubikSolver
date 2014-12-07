@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.io.Serializable;
 
 /** 
  * Cube class will consist of 6 Faces.
  * This class will be representative of a Rubik's Cube.
  */
-public class Cube implements Cloneable {
+public class Cube implements Cloneable, Serializable {
   
   ///////// Private Data /////////////
   private ArrayList<Face> cube;

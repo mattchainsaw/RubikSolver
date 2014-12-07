@@ -16,12 +16,8 @@ SOURCES= \
 	 $(SRC)Face.java \
 	 $(SRC)Solvable.java \
 	 $(SRC)Cube.java \
-	 $(SRC)FileExtension.java \
 	 $(SRC)Input.java \
-	 $(SRC)RDAT.java \
-	 $(SRC)RUB.java \
 	 $(SRC)Solutions.java \
-	 $(SRC)UI.java \
 	 $(SRC)Solver.java
 
 all: classes

@@ -2,6 +2,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
+import java.util.Scanner;
+import java.io.File;
 
 public class Input {
   
@@ -257,7 +259,51 @@ public class Input {
   
   
   private static JPanel UtilButtons() {
-    return new JPanel();
+    JPanel ret = new JPanel();
+    JButton help = new JButton("Help");
+    JButton solve = new JButton("Solve");
+    JButton reset = new JButton("Reset");
+    
+    help.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent event) {
+        JFrame win = new JFrame("Rubik's Cube Help");
+
+        JTextArea text = new JTextArea();
+        win.getContentPane().add(text);
+
+        File file = new File("./res/help.txt");
+        if (file == null) file = new File("../res/help.txt");
+        try {
+          Scanner s = new Scanner(file);
+          while (s.hasNextLine()) {
+            text.append(s.nextLine() + "\n");
+          }
+        }
+        catch (Exception e) {
+          e.printStackTrace();
+        }
+        text.setEditable(false);
+        text.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 20));
+        win.pack();
+        win.setVisible(true);
+        win.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+      }
+    });
+
+
+
+    reset.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent event) {
+        cube.Fresh();
+        paint();
+      }
+    });
+
+    ret.add(help);
+    ret.add(solve);
+    ret.add(reset);
+    ret.setVisible(true);
+    return ret; 
   }
    
   

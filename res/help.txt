@@ -1,0 +1,26 @@
+Rubik's Cube Solver Help
+
+Changing the colors:
+    - To change the color of your mouse, click the desired color on the bottom left side of the
+      Rubik's Cube application. Now, whenever you click a color on the Cube's Representation, 
+      that individual box will change. The Cube's Representation will only allow six colors, so
+      if you have a new seventh color selected by your mouse, every instance of the color you
+      select on the Cube's Representation will change, enforcing the appropriate amount of 
+      colors.
+    
+    - The Cube's Representation is modeled after an "unwrapped" Rubik's Cube. 
+            +---+          - The U is the up, or top side of the cube. if you click on the "U"
+            | U |            Button or the it will turn the top face of the cube.
+        +---+---+---+---+  - The F is the front side. The "F" button turns this face.
+        | L | F | R | B |  - The L is the left face. The "L" button turns this face.
+        +---+---+---+---+  - The R is the right face. The "R" button turns this face.
+            | D |          - The D is the bottom face. The "D" button turns this face.
+            +---+          - The B is the back face. The "B" buttons turns this face.
+
+    - The Notation of the Rubik's Cube is follows the buttons on the bottom right of the 
+      application. 
+       - R, L, U, D, F, B turn their respective faces
+       - Each turn is assumed to be clockwise with respect to the face
+       - If a turn has a prime symbol (an apostrophe ' ) then the turn is counter-clockwise with
+         respect to the face.
+

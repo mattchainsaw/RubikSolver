@@ -25,9 +25,7 @@ public class Solver {
     JP.setLayout(new FlowLayout());
 //    JP.add(new JLabel("Rubik's Cube Solver!\nBy: Matthew Meyer"));
     JLabel title = null;
-    title = new JLabel(new ImageIcon("../img/Rubiks.png"));
-    if (title == null) 
-      title = new JLabel(new ImageIcon("./img/Rubiks.pmg"));
+      title = new JLabel(new ImageIcon("./img/Rubiks.png"));
     if (title == null) {
       System.out.println("Can't find \"Rubiks.png\"");
       System.exit(1);

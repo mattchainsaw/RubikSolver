@@ -283,7 +283,7 @@ public class Input {
     final JButton solve = new JButton("Solve");
     final JButton reset = new JButton("Reset");
     final JButton scram = new JButton("Scramble");
-    final JTextArea soln = new JTextArea();
+    final JTextArea soln = new JTextArea(7,30);
     soln.setEditable(false);
     soln.setFont(new Font(Font.MONOSPACED, Font.BOLD, 16));
     soln.setText("Solution is: ");
@@ -349,7 +349,7 @@ public class Input {
     but.add(scram);
     but.setVisible(true);
     ret.add(but);
-    ret.add(soln, BorderLayout.SOUTH);
+    ret.add(scroll, BorderLayout.SOUTH);
     ret.setVisible(true);
     return ret; 
   }

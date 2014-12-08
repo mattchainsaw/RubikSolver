@@ -91,7 +91,7 @@ public class Cube implements Cloneable {
       }
       else {
         B(b);
-        return "R" + ((b) ? "  ":"' ");
+        return "B" + ((b) ? "  ":"' ");
       }
   }
 
@@ -152,6 +152,25 @@ public class Cube implements Cloneable {
   }
 
   /**
+   * Like toString, but no spaces
+   * @return String of numbers representing cube.
+   */
+  public String toFile() {
+    return this.toString().replace('\n',' ').replace(" ","");
+  }
+
+  public void fromFile(String s) {
+    int i=0;
+    int j=-1;
+    for (char c: s.toCharArray()) {
+      if (i == 0) ++j;
+      int x = c - '0';
+      set(j,i,x);
+      i = (i+1)%9;
+    }
+  }
+
+  /**
    * Copy.
    * @return an identical deep copy of the cube.
    */
@@ -201,9 +220,9 @@ public class Cube implements Cloneable {
       set(2,2,get(5,6));
       set(2,5,get(5,3));
       set(2,8,get(5,0));
-      set(5,0,get(1,2));
+      set(5,0,get(1,8));
       set(5,3,get(1,5));
-      set(5,6,get(1,8));
+      set(5,6,get(1,2));
       set(1,2,temp1);
       set(1,5,temp2);
       set(1,8,temp3);
@@ -212,9 +231,9 @@ public class Cube implements Cloneable {
       set(0,2,get(1,2));
       set(0,5,get(1,5));
       set(0,8,get(1,8));
-      set(1,2,get(5,0));
+      set(1,2,get(5,6));
       set(1,5,get(5,3));
-      set(1,8,get(5,6));
+      set(1,8,get(5,0));
       set(5,0,get(2,8));
       set(5,3,get(2,5));
       set(5,6,get(2,2));
@@ -390,7 +409,7 @@ public class Cube implements Cloneable {
    * @param cw Clockwise if true, counter-clockwise if false
    */
   public void B(boolean cw) {
-    cube.get(0).Turn(cw);
+    cube.get(5).Turn(cw);
     int temp1 = cube.get(1).get(0);
     int temp2 = cube.get(1).get(1);
     int temp3 = cube.get(1).get(2);
@@ -404,9 +423,9 @@ public class Cube implements Cloneable {
       set(2,6,get(3,0));
       set(2,7,get(3,3));
       set(2,8,get(3,6));
-      set(3,0,temp1);
+      set(3,0,temp3);
       set(3,3,temp2);
-      set(3,6,temp3);
+      set(3,6,temp1);
     }
     else {
       set(1,0,get(3,6));

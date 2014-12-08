@@ -13,7 +13,7 @@ import java.io.File;
  */
 
 public class Input {
-
+  
   // This is the algorithm for solving the cube used. It may be changed if a better one is written
   private static Algorithm ALG = new Algorithm();
 
@@ -22,8 +22,8 @@ public class Input {
   private static Color FRONT = Color.red;
   private static Color TOP = Color.yellow;
   private static Color BOTTOM = Color.white;
-  private static Color LEFT = Color.green;
-  private static Color RIGHT = Color.blue;
+  private static Color LEFT = Color.blue;
+  private static Color RIGHT = Color.green;
   private static Color BACK = Color.orange;
   private static JButton[][] buttons = new JButton[6][9];
 
@@ -32,7 +32,7 @@ public class Input {
    */
   public static JPanel CubePanel() {
     final JPanel ret = new JPanel();
-    ret.setLayout(new GridLayout(3,4));
+    ret.setLayout(new GridLayout(3,4,2,2));
     ret.add(new JLabel());                 // keep blank
     ret.add(FacePanel(1));
     ret.add(new JLabel());                 // keep blank
@@ -283,10 +283,13 @@ public class Input {
     final JButton solve = new JButton("Solve");
     final JButton reset = new JButton("Reset");
     final JButton scram = new JButton("Scramble");
-    final JTextArea soln = new JTextArea(10,45);
+    final JTextArea soln = new JTextArea();
     soln.setEditable(false);
-    soln.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+    soln.setFont(new Font(Font.MONOSPACED, Font.BOLD, 16));
     soln.setText("Solution is: ");
+    soln.setLineWrap(true);
+    soln.setWrapStyleWord(true);
+    JScrollPane scroll = new JScrollPane(soln);
 
     // help!
     help.addActionListener(new ActionListener() {
@@ -319,6 +322,7 @@ public class Input {
     solve.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent event) {
         soln.setText("Solution is:\n" + cube.solve(ALG));
+        System.out.println(cube.toString());
       }
     });
 

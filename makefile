@@ -23,7 +23,7 @@ SOURCES= \
 all: classes
 	@echo "Build Successful!"
 	@echo "Enter \"make doc\" to generate documentation"
-	@echo "Enter \"java -cp bin Solver\" to run"
+	@echo "Enter \"java -cp bin RubikSolver\" to run"
 
 classes:
 	@mkdir -p $(BIN)

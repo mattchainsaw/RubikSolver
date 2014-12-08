@@ -43,8 +43,9 @@ public class Algorithm implements Solvable {
     save = shorten(reverse(str));
     str = "";
     c = cube.clone();
-    while(!bottomCorners(cube)) {
-      if (i == 25) {
+
+    while(!bottomCorner1(cube)) {
+      if (i == 8) {
         i=0;
         cube = c.clone();
         str = "";
@@ -52,25 +53,209 @@ public class Algorithm implements Solvable {
       ++i;
       str = cube.rand() + str;
     }
-    System.out.println("Done with Step 2");
+    System.out.println("Done with Step 2A");
     i=0;
     save = save + shorten(reverse(str));
     str = "";
     c = cube.clone();
-    while(!twoLayers(cube)) {
-      if (i == 25) {
-        i=0; cube = c.clone(); str = "";
+   
+    while(!bottomCorner2(cube)) {
+      if (i == 8) {
+        i=0;
+        cube = c.clone();
+        str = "";
       }
-      ++i; 
+      ++i;
       str = cube.rand() + str;
     }
-    System.out.println("Done with Step 3");
+    System.out.println("Done with Step 2B");
     i=0;
     save = save + shorten(reverse(str));
+    str = "";
+    c = cube.clone();
+   
+    while(!bottomCorner3(cube)) {
+      if (i == 8) {
+        i=0;
+        cube = c.clone();
+        str = "";
+      }
+      ++i;
+      str = cube.rand() + str;
+    }
+    System.out.println("Done with Step 2C");
+    i=0;
+    save = save + shorten(reverse(str));
+    str = "";
+    c = cube.clone();
+   
+    while(!bottomCorner4(cube)) {
+      if (i == 8) {
+        i=0;
+        cube = c.clone();
+        str = "";
+      }
+      ++i;
+      str = cube.rand() + str;
+    }
+    System.out.println("Done with Step 2D");
+    i=0;
+    save = save + shorten(reverse(str));
+    str = "";
+    c = cube.clone();
+   
+    while(!twoLayers(cube)) { 
+/*      if (cube.get(0,1) == 0 && cube.get(1,7) == 4) {
+        cube.U();
+        cube.R();
+        cube.U(false);
+        cube.R(false);
+        cube.U(false);
+        cube.F(false);
+        cube.U();
+        cube.F();
+        str = str + "U  R  U' R' U' F' U  F  ";
+      }
+      else if (cube.get(0,1) == 0 && cube.get(1,7) == 3) {
+        cube.U(false);
+        cube.L(false);
+        cube.U();
+        cube.L();
+        cube.U();
+        cube.F();
+        cube.U(false);
+        cube.F(false);
+        str = str + "U' L' U  L  U  F  U' F' ";
+      }
+      else if (cube.get(4,1) == 4 && cube.get(1,5) == 5) {
+        cube.U();
+        cube.B();
+        cube.U(false);
+        cube.B(false);
+        cube.U(false);
+        cube.R(false);
+        cube.U();
+        cube.R();
+        str = str + "U  B  U' B' U' R' U  R  ";
+      }
+      else if (cube.get(4,1) == 4 && cube.get(1,5) == 0) {
+        cube.U(false);
+        cube.F(false);
+        cube.U();
+        cube.F();
+        cube.U();
+        cube.R();
+        cube.U(false);
+        cube.R(false);
+        str = str + "U' F' U  F  U  R  U' R' ";
+      }
+      else if (cube.get(3,1) == 3 && cube.get(1,3) == 0) {
+        cube.U();
+        cube.F();
+        cube.U(false);
+        cube.F(false);
+        cube.U(false);
+        cube.L(false);
+        cube.U();
+        cube.L();
+        str = str + "U  F  U' F' U' L' U  L  ";
+      }
+      else if (cube.get(3,1) == 0 && cube.get(1,3) == 5) {
+        cube.U(false);
+        cube.B(false);
+        cube.U();
+        cube.B();
+        cube.U();
+        cube.L();
+        cube.U(false);
+        cube.L(false);
+        str = str + "U' B' U  B  U  L  U' L' ";
+      }
+      else if (cube.get(5,1) == 5 && cube.get(1,1) == 3) {
+        cube.U();
+        cube.L();
+        cube.U(false);
+        cube.L(false);
+        cube.U(false);
+        cube.B(false);
+        cube.U();
+        cube.B();
+        str = str + "U  L  U' L' U' B' U  B  ";
+      }
+      else if (cube.get(5,1) == 5 && cube.get(1,1) == 3) {
+        cube.U(false);
+        cube.R(false);
+        cube.U();
+        cube.R();
+        cube.U();
+        cube.B();
+        cube.U(false);
+        cube.B(false);
+        str = str + "U' R' U  R  U  B  U' B' ";
+      }
+
+      else if (cube.get(0,5) == 1 || cube.get(4,3) == 1) {
+        cube.U();
+        cube.R();
+        cube.U(false);
+        cube.R(false);
+        cube.U(false);
+        cube.F(false);
+        cube.U();
+        cube.F();
+        str = str + "U  R  U' R' U' F' U  F  ";
+      }
+      else if (cube.get(0,3) == 1 || cube.get(3,5) == 1) {
+        cube.U(false);
+        cube.L(false);
+        cube.U();
+        cube.L();
+        cube.U();
+        cube.F();
+        cube.U(false);
+        cube.F(false);
+        str = str + "U' L' U  L  U  F  U' F' ";
+      }
+      else if (cube.get(4,5) == 1 || cube.get(5,3) == 1) {
+        cube.U(false);
+        cube.R(false);
+        cube.U();
+        cube.R();
+        cube.U();
+        cube.B();
+        cube.U(false);
+        cube.B(false);
+        str = str + "U' R' U  R  U  B  U' B' ";
+
+      }
+      else if (cube.get(3,3) == 1 || cube.get(5,5) == 1) {
+        cube.U();
+        cube.L();
+        cube.U(false);
+        cube.L(false);
+        cube.U(false);
+        cube.B(false);
+        cube.U();
+        cube.B();
+        str = str + "U  L  U' L' U' B' U  B  ";
+
+      }
+      else { cube.U(); str = "U  " + str; }
+*/    if (i == 30) {
+        i=0; cube = c.clone(); str = "";
+      }
+      ++i;
+      str = cube.rand() + str;
+    }
+
+
+    System.out.println("Done with Step 3");
+    i=0;
+    save = save + shorten(str);
     str = "";
     c = cube.clone();
     while (!topCross(cube)) {
-      if (i == 25) {
+      if (i == 30) {
         i=0; cube = c.clone(); str = "";
       }
       ++i;
@@ -82,7 +267,7 @@ public class Algorithm implements Solvable {
     str = "";
     c = cube.clone();
     while (!topCorn(cube)) {
-      if (i == 35) {
+      if (i == 30) {
         i=0; cube = c.clone(); str = "";
       }
       ++i;
@@ -132,7 +317,10 @@ public class Algorithm implements Solvable {
   }
 
   private boolean twoLayers(Cube c) {
-    if (!bottomCorners(c)) return false;
+    if (!bottomCorner1(c)) return false;
+    if (!bottomCorner2(c)) return false;
+    if (!bottomCorner3(c)) return false;
+    if (!bottomCorner4(c)) return false;
     if (c.get(0,3) != 0) return false;
     if (c.get(0,5) != 0) return false;
     if (c.get(3,3) != 3) return false;
@@ -157,20 +345,35 @@ public class Algorithm implements Solvable {
     return true;
   }
 
-  private boolean bottomCorners(Cube c) {
+  private boolean bottomCorner1(Cube c) {
     if (!(bottomCross(c))) return false;
     if (c.get(2,0) != 2) return false;
-    if (c.get(2,2) != 2) return false;
-    if (c.get(2,6) != 2) return false;
-    if (c.get(2,8) != 2) return false;
     if (c.get(0,6) != 0) return false;
-    if (c.get(0,8) != 0) return false;
-    if (c.get(3,6) != 3) return false;
     if (c.get(3,8) != 3) return false;
+    return true;
+  }
+
+  private boolean bottomCorner2(Cube c) {
+    if (!(bottomCross(c))) return false;
+    if (c.get(2,2) != 2) return false;
+    if (c.get(0,8) != 0) return false;
     if (c.get(4,6) != 4) return false;
+    return true;
+  }
+
+  private boolean bottomCorner3(Cube c) {
+    if (!(bottomCross(c))) return false;
+    if (c.get(2,6) != 2) return false;
+    if (c.get(3,6) != 3) return false;
+    if (c.get(5,8) != 5) return false;
+    return true;
+  }
+
+  private boolean bottomCorner4(Cube c) {
+    if (!(bottomCross(c))) return false;
+    if (c.get(2,8) != 2) return false;
     if (c.get(4,8) != 4) return false;
     if (c.get(5,6) != 5) return false;
-    if (c.get(5,8) != 5) return false;
     return true;
   }
 

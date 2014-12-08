@@ -10,7 +10,6 @@ Louis University.
 
 Things to improve:
  - Solving the cube. 
- - Peel off the stickers method.
  - Make it more pretty.
  - Get a timer.
  - Figure out the Java makefile situation

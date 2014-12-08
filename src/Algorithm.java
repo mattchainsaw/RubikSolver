@@ -163,8 +163,7 @@ public class Algorithm implements Solvable {
     System.out.println("Done with Step 3");
     save = save + shorten(str);
     str = "";
-    while (!top(cube)) {
-      System.out.println(cube.toString());
+    while (!topCross(cube)) {
       if (cube.get(1,1) == 1 && cube.get(1,3) == 1 &&
           cube.get(1,5) != 1 && cube.get(1,7) != 1) {
         cube.F(); cube.U(); cube.R(); cube.U(false); cube.R(false); cube.F(false);
@@ -185,21 +184,71 @@ public class Algorithm implements Solvable {
       }
     }
 
-    System.out.println("Done with Step 4");
+    System.out.println("Done with Step 4A");
     save = save + shorten(str);
     str = "";
-    i=0;
-    c = cube.clone();
-    while (!solved(cube)) {
-      if (i == 20) {
-        i=0;
-        cube = c.clone();
-        str = "";
+    while (!top(cube)) {
+      if (cube.get(1,0) != 1 && cube.get(1,2) != 1 &&
+          cube.get(1,6) != 1 && cube.get(1,8) != 1) {
+        while (cube.get(3,2) != 1) {
+          cube.U();
+          str = str + "U  ";
+        }
       }
-      ++i;
-      str = str + cube.rand();
+      else if (
+          (cube.get(1,0) == 1 && cube.get(1,2) != 1 &&
+          cube.get(1,6) != 1 && cube.get(1,8) != 1) ||
+          (cube.get(1,0) != 1 && cube.get(1,2) == 1 &&
+          cube.get(1,6) != 1 && cube.get(1,8) != 1) ||
+          (cube.get(1,0) != 1 && cube.get(1,2) != 1 &&
+          cube.get(1,6) == 1 && cube.get(1,8) != 1) ||
+          (cube.get(1,0) != 1 && cube.get(1,2) != 1 &&
+          cube.get(1,6) != 1 && cube.get(1,8) == 1) ) {
+        while (cube.get(1,6) != 1) {
+          cube.U();
+          str = str + "U  ";
+        }
+      }
+      else {
+        while (cube.get(0,0) != 1) {
+          cube.U();
+          str = str + "U  ";
+        }
+      }
+      cube.R(); cube.U(); cube.R(false); cube.U();
+      cube.R(); cube.U(); cube.U(); cube.R(false);
+      str = str + "R  U  R' U  R  U  U  R' ";
     }
-    System.out.println("Done with Step 5");
+    System.out.println("Done with Step 4B");
+    
+    save = save + shorten(str);
+    str = "";
+    while (!solved(cube)) {
+      while (cube.get(5,0) != cube.get(5,2) &&
+             cube.get(4,0) != cube.get(4,2) &&
+             cube.get(3,0) != cube.get(3,2) &&
+             cube.get(0,0) != cube.get(0,2)) {
+        cube.R(false); cube.F(); cube.R(false); cube.B(); cube.B();
+        cube.R(); cube.F(false); cube.R(false); cube.B(); cube.B();
+        cube.R(); cube.R(); cube.U();
+        str = str + "R' F  R' B  B  R  F' R' B  B  R  R  U  ";
+      }
+      cube.U();
+      str = str + "U  ";
+    }
+    System.out.println("Done with Step 5A");
+    while (!solvedE(cube)) {
+      while (cube.get(0,1) != 0) {
+        cube.U();
+        str = str + "U  ";
+      }
+      if (solvedE(cube)) break;
+      cube.R(); cube.R(); cube.U(false); cube.R(false); cube.U(false);
+      cube.R(); cube.U(); cube.R(); cube.U(); cube.R(); cube.U(false);
+      cube.R();
+      str = str + "R  R  U' R' U' R  U  R  U  R  U' R  ";
+    }
+    System.out.println("Done with Step 5B");
     save = save + shorten(str);
     return shorten(save);        
    } 
@@ -207,21 +256,30 @@ public class Algorithm implements Solvable {
 
 
   // bools //
-  
   private boolean solved(Cube c) {
     if (!top(c)) return false;
     if (c.get(0,0) != 0) return false;
-    if (c.get(0,1) != 0) return false;
     if (c.get(0,2) != 0) return false;
     if (c.get(3,0) != 3) return false;
-    if (c.get(3,1) != 3) return false;
     if (c.get(3,2) != 3) return false;
     if (c.get(4,0) != 4) return false;
-    if (c.get(4,1) != 4) return false;
     if (c.get(4,2) != 4) return false;
     if (c.get(5,0) != 5) return false;
-    if (c.get(5,1) != 5) return false;
     if (c.get(5,2) != 5) return false;
+    return true;
+  }
+  
+  private boolean solvedE(Cube c) {
+    if (!top(c)) return false;
+    if (c.get(0,1) != 0) return false;
+    if (c.get(3,1) != 3) return false;
+    if (c.get(4,1) != 4) return false;
+    if (c.get(5,1) != 5) return false;
+    return true;
+  }
+
+  private boolean top(Cube c) {
+    if (!twoLayers(c)) return false;
     if (c.get(1,0) != 1) return false;
     if (c.get(1,2) != 1) return false;
     if (c.get(1,6) != 1) return false;
@@ -229,7 +287,7 @@ public class Algorithm implements Solvable {
     return true;
   }
 
-  private boolean top(Cube c) {
+  private boolean topCross(Cube c) {
     if (!twoLayers(c)) return false;
     if (c.get(1,1) != 1) return false;
     if (c.get(1,3) != 1) return false;

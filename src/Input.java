@@ -5,8 +5,18 @@ import javax.swing.event.*;
 import java.util.Scanner;
 import java.io.File;
 
+/** Input class.
+ * This class has a lot of static methods that control the user's 
+ * from the RubikSolver.java program. This is the the main UI for
+ * the Rubik's Cube Solver.
+ * @author Matthew Meyer
+ */
+
 public class Input {
-  
+
+  // This is the algorithm for solving the cube used. It may be changed if a better one is written
+  private static Algorithm ALG = new Algorithm();
+
   private static Cube cube = new Cube();
   private static Color color = Color.red;
   private static Color FRONT = Color.red;
@@ -17,8 +27,11 @@ public class Input {
   private static Color BACK = Color.orange;
   private static JButton[][] buttons = new JButton[6][9];
 
+  /** Returns a JPanel of the GUI representation of the Cube.
+   * @return JPanel of the Cube.
+   */
   public static JPanel CubePanel() {
-    JPanel ret = new JPanel();
+    final JPanel ret = new JPanel();
     ret.setLayout(new GridLayout(3,4));
     ret.add(new JLabel());                 // keep blank
     ret.add(FacePanel(1));
@@ -36,8 +49,12 @@ public class Input {
     return ret;
   }
 
+  /** Returns a JPanel of the GUI representation of the 
+   * solve, reset, help, and color selection of the program.
+   * @return JPanel of the different options.
+   */
   public static JPanel UtilsPanel() {
-    JPanel ret = new JPanel();
+    final JPanel ret = new JPanel();
     ret.setLayout(new GridLayout(2,1));
     ret.add(UtilButtons(), BorderLayout.CENTER);
     ret.add(ColorButtons(), BorderLayout.SOUTH);
@@ -45,21 +62,24 @@ public class Input {
     return ret;
   }
 
+  /** Returns a JPanel of the buttons that modify the user's input cube.
+   * @return JPanel of Cube operation buttons.
+   */
   public static JPanel OperationsPanel() {
-    JPanel ret = new JPanel();
+    final JPanel ret = new JPanel();
     ret.setLayout(new GridLayout(2,6));
-    JButton R = new JButton("R");
-    JButton L = new JButton("L");
-    JButton U = new JButton("U");
-    JButton D = new JButton("D");
-    JButton F = new JButton("F");
-    JButton B = new JButton("B");
-    JButton r = new JButton("R'");
-    JButton l = new JButton("L'");
-    JButton u = new JButton("U'");
-    JButton d = new JButton("D'");
-    JButton f = new JButton("F'");
-    JButton b = new JButton("B'");
+    final JButton R = new JButton("R");
+    final JButton L = new JButton("L");
+    final JButton U = new JButton("U");
+    final JButton D = new JButton("D");
+    final JButton F = new JButton("F");
+    final JButton B = new JButton("B");
+    final JButton r = new JButton("R'");
+    final JButton l = new JButton("L'");
+    final JButton u = new JButton("U'");
+    final JButton d = new JButton("D'");
+    final JButton f = new JButton("F'");
+    final JButton b = new JButton("B'");
 
     R.setFont(new Font("Arial", Font.PLAIN, 40));
     L.setFont(new Font("Arial", Font.PLAIN, 40));
@@ -175,7 +195,7 @@ public class Input {
   }
 
   private static JPanel FacePanel(int c) {
-    JPanel ret = new JPanel();
+    final JPanel ret = new JPanel();
     ret.setLayout(new GridLayout(3,3));
     for (int i=0; i<9; i++) {
       buttons[c][i] = ColorLabel(c,i);
@@ -255,20 +275,25 @@ public class Input {
       }
     }
   }
-    
-  
   
   private static JPanel UtilButtons() {
-    JPanel ret = new JPanel();
-    JButton help = new JButton("Help");
-    JButton solve = new JButton("Solve");
-    JButton reset = new JButton("Reset");
-    
+    final JPanel ret = new JPanel();
+    final JPanel but = new JPanel();
+    final JButton help = new JButton("Help");
+    final JButton solve = new JButton("Solve");
+    final JButton reset = new JButton("Reset");
+    final JButton scram = new JButton("Scramble");
+    final JTextArea soln = new JTextArea(10,45);
+    soln.setEditable(false);
+    soln.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
+    soln.setText("Solution is: ");
+
+    // help!
     help.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent event) {
-        JFrame win = new JFrame("Rubik's Cube Help");
+        final JFrame win = new JFrame("Rubik's Cube Help");
 
-        JTextArea text = new JTextArea();
+        final JTextArea text = new JTextArea();
         win.getContentPane().add(text);
 
         File file = new File("./res/help.txt");
@@ -290,8 +315,14 @@ public class Input {
       }
     });
 
+    // solve!
+    solve.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent event) {
+        soln.setText("Solution is:\n" + cube.solve(ALG));
+      }
+    });
 
-
+    // reset!
     reset.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent event) {
         cube.Fresh();
@@ -299,17 +330,28 @@ public class Input {
       }
     });
 
-    ret.add(help);
-    ret.add(solve);
-    ret.add(reset);
+    // scramble!
+    scram.addActionListener (new ActionListener() {
+      public void actionPerformed(ActionEvent event) {
+        cube.move(100);
+        paint();
+      }
+    });
+
+    ret.setLayout(new BorderLayout());
+    but.add(help);
+    but.add(solve);
+    but.add(reset);
+    but.add(scram);
+    but.setVisible(true);
+    ret.add(but);
+    ret.add(soln, BorderLayout.SOUTH);
     ret.setVisible(true);
     return ret; 
   }
-   
-  
   
   private static JPanel ColorButtons() {
-    JPanel ret = new JPanel();
+    final JPanel ret = new JPanel();
     ret.setLayout(new GridLayout(2,5));
     ret.add(cb(Color.black));
     ret.add(cb(Color.blue));
@@ -325,9 +367,8 @@ public class Input {
     return ret;
   }
 
-
   private static JButton cb(final Color c) {
-    JButton jb = new JButton();
+    final JButton jb = new JButton();
     jb.setBackground(c);
     jb.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent event) {
@@ -336,17 +377,5 @@ public class Input {
     });
     return jb;
   }
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

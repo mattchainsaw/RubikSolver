@@ -16,9 +16,9 @@ SOURCES= \
 	 $(SRC)Face.java \
 	 $(SRC)Solvable.java \
 	 $(SRC)Cube.java \
+	 $(SRC)Algorithm.java \
 	 $(SRC)Input.java \
-	 $(SRC)Solutions.java \
-	 $(SRC)Solver.java
+	 $(SRC)RubikSolver.java
 
 all: classes
 	@echo "Build Successful!"

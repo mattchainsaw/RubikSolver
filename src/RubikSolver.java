@@ -1,14 +1,17 @@
 import java.awt.*;
 import javax.swing.*;
 
-public class Solver {
+/** 
+ * Main class to run the Rubik's Cube Solver program.
+ * @author Matthew Meyer
+ */
+public class RubikSolver {
   
   public static void main(String[] args) {
     // Main window
     JFrame win = new JFrame("Rubik's Cube Solver");
     win.setLayout(new GridLayout(2,2));
     win.setLocation(100,100);
-    win.setSize(200,200);
     /*  +--------+--------+
      *  |        | cube   |
      *  | title  | view   |
@@ -26,6 +29,7 @@ public class Solver {
 //    JP.add(new JLabel("Rubik's Cube Solver!\nBy: Matthew Meyer"));
     JLabel title = null;
       title = new JLabel(new ImageIcon("./img/Rubiks.png"));
+    if (title == null) title = new JLabel(new ImageIcon("../img/Rubiks.png"));
     if (title == null) {
       System.out.println("Can't find \"Rubiks.png\"");
       System.exit(1);

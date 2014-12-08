@@ -1,12 +1,11 @@
 import java.util.ArrayList;
 import java.util.Random;
-import java.io.Serializable;
 
 /** 
  * Cube class will consist of 6 Faces.
  * This class will be representative of a Rubik's Cube.
  */
-public class Cube implements Cloneable, Serializable {
+public class Cube implements Cloneable {
   
   ///////// Private Data /////////////
   private ArrayList<Face> cube;
@@ -63,39 +62,48 @@ public class Cube implements Cloneable, Serializable {
     return s;
   }
 
-  private String rand() {
+  /** 
+   * Makes a single random turn
+   * @return string of moves the cube made.
+   */
+  public String rand() {
       int x = R.nextInt(6);
       boolean b = R.nextBoolean();
       if      (x == 0) {
         R(b);
-        return "R" + ((b) ? "":"'");
+        return "R" + ((b) ? "  ":"' ");
       }
       else if (x == 1) {
         L(b);
-        return "L" + ((b) ? "":"'");
+        return "L" + ((b) ? "  ":"' ");
       }
       else if (x == 2) {
         U(b);
-        return "U" + ((b) ? "":"'");
+        return "U" + ((b) ? "  ":"' ");
       }
       else if (x == 3) {
         D(b);
-        return "D" + ((b) ? "":"'");
+        return "D" + ((b) ? "  ":"' ");
       }
       else if (x == 4) {
         F(b);
-        return "F" + ((b) ? "":"'");
+        return "F" + ((b) ? "  ":"' ");
       }
       else {
         B(b);
-        return "R" + ((b) ? "":"'");
+        return "R" + ((b) ? "  ":"' ");
       }
   }
 
   // Probably will never succeed
+  /**
+   * solve.
+   * This method solves the cube and tells the user what steps to take using standard notation
+   * @param s An instance of Solvable, an algorithm for the Cube
+   * @return A String of turns to do to reach the solved state.
+   */
   public String solve(Solvable s) {
-    String sol = s.solve(this.clone());
-    return sol;
+    return s.solve(this.clone());
   }
 
   /**

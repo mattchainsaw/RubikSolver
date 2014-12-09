@@ -224,20 +224,24 @@ public class Algorithm implements Solvable {
     save = save + shorten(str);
     str = "";    
     c = cube.clone();
-    i=0;
+    i=0;int j=0;
     while (!solved(cube)) {
       if (i == 30) {
         i = 0;
         cube = c.clone();
         str = "";
       }
-      ++i;
+      ++i;++j;
       str = str + cube.rand();
+      if (j == 10000) {
+        str = "Try to rip off the stickers!";
+        break;
+      }
     }
     System.out.println("Done with Step 5");
 
-    save = save + shorten(str);
-    return shorten(save);        
+    save = save + str;
+    return save;        
    } 
 
 

@@ -222,33 +222,20 @@ public class Algorithm implements Solvable {
     System.out.println("Done with Step 4B");
     
     save = save + shorten(str);
-    str = "";
+    str = "";    
+    c = cube.clone();
+    i=0;
     while (!solved(cube)) {
-      while (cube.get(5,0) != cube.get(5,2) &&
-             cube.get(4,0) != cube.get(4,2) &&
-             cube.get(3,0) != cube.get(3,2) &&
-             cube.get(0,0) != cube.get(0,2)) {
-        cube.R(false); cube.F(); cube.R(false); cube.B(); cube.B();
-        cube.R(); cube.F(false); cube.R(false); cube.B(); cube.B();
-        cube.R(); cube.R(); cube.U();
-        str = str + "R' F  R' B  B  R  F' R' B  B  R  R  U  ";
+      if (i == 30) {
+        i = 0;
+        cube = c.clone();
+        str = "";
       }
-      cube.U();
-      str = str + "U  ";
+      ++i;
+      str = str + cube.rand();
     }
-    System.out.println("Done with Step 5A");
-    while (!solvedE(cube)) {
-      while (cube.get(0,1) != 0) {
-        cube.U();
-        str = str + "U  ";
-      }
-      if (solvedE(cube)) break;
-      cube.R(); cube.R(); cube.U(false); cube.R(false); cube.U(false);
-      cube.R(); cube.U(); cube.R(); cube.U(); cube.R(); cube.U(false);
-      cube.R();
-      str = str + "R  R  U' R' U' R  U  R  U  R  U' R  ";
-    }
-    System.out.println("Done with Step 5B");
+    System.out.println("Done with Step 5");
+
     save = save + shorten(str);
     return shorten(save);        
    } 

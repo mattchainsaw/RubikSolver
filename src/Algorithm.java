@@ -12,6 +12,7 @@ public class Algorithm implements Solvable {
    */
   public String solve(Cube cube) {
     String str = "";
+    Cube orig = cube.clone();
     Cube c = cube.clone();
     String save = "";
     int i=0;
@@ -241,7 +242,12 @@ public class Algorithm implements Solvable {
     System.out.println("Done with Step 5");
 
     save = save + str;
-    return save;        
+    if (save.contains("Try")) {
+      save = orig.move(5);
+      save = save + orig.solve(new Algorithm());
+    }
+      
+    return shorten(save);        
    } 
 
 

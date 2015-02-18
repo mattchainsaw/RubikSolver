@@ -5,7 +5,7 @@ import javax.swing.*;
  * Main class to run the Rubik's Cube Solver program.
  * @author Matthew Meyer
  */
-public class RubikSolver {
+class RubikSolver {
   
   public static void main(String[] args) {
     // Main window
@@ -29,11 +29,6 @@ public class RubikSolver {
 //    JP.add(new JLabel("Rubik's Cube Solver!\nBy: Matthew Meyer"));
     JLabel title = null;
       title = new JLabel(new ImageIcon("./img/Rubiks.png"));
-    if (title == null) title = new JLabel(new ImageIcon("../img/Rubiks.png"));
-    if (title == null) {
-      System.out.println("Can't find \"Rubiks.png\"");
-      System.exit(1);
-    }
     JP.add(title);
     JP.setVisible(true);
     win.add(JP);

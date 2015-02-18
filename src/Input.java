@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;
 import java.util.Scanner;
 import java.io.File;
 
@@ -12,12 +11,12 @@ import java.io.File;
  * @author Matthew Meyer
  */
 
-public class Input {
+class Input {
   
   // This is the algorithm for solving the cube used. It may be changed if a better one is written
-  private static Algorithm ALG = new Algorithm();
+  private static final Algorithm ALG = new Algorithm();
 
-  private static Cube cube = new Cube();
+  private static final Cube cube = new Cube();
   private static Color color = Color.red;
   private static Color FRONT = Color.red;
   private static Color TOP = Color.yellow;
@@ -25,7 +24,7 @@ public class Input {
   private static Color LEFT = Color.blue;
   private static Color RIGHT = Color.green;
   private static Color BACK = Color.orange;
-  private static JButton[][] buttons = new JButton[6][9];
+  private static final JButton[][] buttons = new JButton[6][9];
 
   /** Returns a JPanel of the GUI representation of the Cube.
    * @return JPanel of the Cube.
@@ -300,7 +299,6 @@ public class Input {
         win.getContentPane().add(text);
 
         File file = new File("./res/help.txt");
-        if (file == null) file = new File("../res/help.txt");
         try {
           Scanner s = new Scanner(file);
           while (s.hasNextLine()) {

@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author Matthew Meyer
  */
 
-public class Face implements Serializable{
+class Face implements Serializable{
   /**
    * Constructor for the Face class.
    * @param aFace Integer number denoting what side this face represents.
@@ -57,32 +57,31 @@ public class Face implements Serializable{
     if (clockwise) {
       // corners
       int temp = blocks.get(0);
-      blocks.set(0,blocks.get(6));
-      blocks.set(6,blocks.get(8));
-      blocks.set(8,blocks.get(2));
-      blocks.set(2,temp);
+      blocks.set(0, blocks.get(6));
+      blocks.set(6, blocks.get(8));
+      blocks.set(8, blocks.get(2));
+      blocks.set(2, temp);
       // edges
       temp = blocks.get(1);
-      blocks.set(1,blocks.get(3));
-      blocks.set(3,blocks.get(7));
-      blocks.set(7,blocks.get(5));
-      blocks.set(5,temp);
-    }
-    else {
+      blocks.set(1, blocks.get(3));
+      blocks.set(3, blocks.get(7));
+      blocks.set(7, blocks.get(5));
+      blocks.set(5, temp);
+    } else {
       // corners
       int temp = blocks.get(0);
-      blocks.set(0,blocks.get(2));
-      blocks.set(2,blocks.get(8));
-      blocks.set(8,blocks.get(6));
-      blocks.set(6,temp);
+      blocks.set(0, blocks.get(2));
+      blocks.set(2, blocks.get(8));
+      blocks.set(8, blocks.get(6));
+      blocks.set(6, temp);
       // edges
       temp = blocks.get(1);
-      blocks.set(1,blocks.get(5));
-      blocks.set(5,blocks.get(7));
-      blocks.set(7,blocks.get(3));
-      blocks.set(3,temp);
+      blocks.set(1, blocks.get(5));
+      blocks.set(5, blocks.get(7));
+      blocks.set(7, blocks.get(3));
+      blocks.set(3, temp);
     }
   }
 
-  private ArrayList<Integer> blocks;
+  private final ArrayList<Integer> blocks;
 }

@@ -8,7 +8,7 @@ import java.util.Random;
 public class Cube implements Cloneable {
   
   ///////// Private Data /////////////
-  private ArrayList<Face> cube;
+  private final ArrayList<Face> cube;
   private transient static Random R;
   ////////////////////////////////////
 

@@ -251,105 +251,84 @@ public class Algorithm implements Solvable {
    } 
 
 
-
   // bools //
   private boolean solved(Cube c) {
     if (!top(c)) return false;
-    if (c.get(0,0) != 0) return false;
-    if (c.get(0,2) != 0) return false;
-    if (c.get(3,0) != 3) return false;
-    if (c.get(3,2) != 3) return false;
-    if (c.get(4,0) != 4) return false;
-    if (c.get(4,2) != 4) return false;
-    if (c.get(5,0) != 5) return false;
-    if (c.get(5,2) != 5) return false;
-    return true;
+    if (c.get(0, 0) != 0) return false;
+    if (c.get(0, 2) != 0) return false;
+    if (c.get(3, 0) != 3) return false;
+    if (c.get(3, 2) != 3) return false;
+    if (c.get(4, 0) != 4) return false;
+    if (c.get(4, 2) != 4) return false;
+    return c.get(5, 0) == 5 && c.get(5, 2) == 5;
   }
   
   private boolean solvedE(Cube c) {
     if (!top(c)) return false;
-    if (c.get(0,1) != 0) return false;
-    if (c.get(3,1) != 3) return false;
-    if (c.get(4,1) != 4) return false;
-    if (c.get(5,1) != 5) return false;
-    return true;
+    if (c.get(0, 1) != 0) return false;
+    if (c.get(3, 1) != 3) return false;
+    return c.get(4, 1) == 4 && c.get(5, 1) == 5;
   }
 
   private boolean top(Cube c) {
     if (!twoLayers(c)) return false;
-    if (c.get(1,0) != 1) return false;
-    if (c.get(1,2) != 1) return false;
-    if (c.get(1,6) != 1) return false;
-    if (c.get(1,8) != 1) return false;
-    return true;
+    if (c.get(1, 0) != 1) return false;
+    if (c.get(1, 2) != 1) return false;
+    return c.get(1, 6) == 1 && c.get(1, 8) == 1;
   }
 
   private boolean topCross(Cube c) {
     if (!twoLayers(c)) return false;
-    if (c.get(1,1) != 1) return false;
-    if (c.get(1,3) != 1) return false;
-    if (c.get(1,4) != 1) return false;
-    if (c.get(1,5) != 1) return false;
-    if (c.get(1,7) != 1) return false;
-    return true;
+    if (c.get(1, 1) != 1) return false;
+    if (c.get(1, 3) != 1) return false;
+    if (c.get(1, 4) != 1) return false;
+    return c.get(1, 5) == 1 && c.get(1, 7) == 1;
   }
 
   private boolean twoLayers(Cube c) {
     if (!bottomCorner4(c)) return false;
-    if (c.get(0,3) != 0) return false;
-    if (c.get(0,5) != 0) return false;
-    if (c.get(3,3) != 3) return false;
-    if (c.get(3,5) != 3) return false;
-    if (c.get(4,3) != 4) return false;
-    if (c.get(4,5) != 4) return false;
-    if (c.get(5,3) != 5) return false;
-    if (c.get(5,5) != 5) return false;
-    return true;
+    if (c.get(0, 3) != 0) return false;
+    if (c.get(0, 5) != 0) return false;
+    if (c.get(3, 3) != 3) return false;
+    if (c.get(3, 5) != 3) return false;
+    if (c.get(4, 3) != 4) return false;
+    if (c.get(4, 5) != 4) return false;
+    return c.get(5, 3) == 5 && c.get(5, 5) == 5;
   }
 
   private boolean bottomCross(Cube c) {
-    if (c.get(2,1) != 2) return false;
-    if (c.get(2,3) != 2) return false;
-    if (c.get(2,4) != 2) return false;
-    if (c.get(2,5) != 2) return false;
-    if (c.get(2,7) != 2) return false;
-    if (c.get(0,7) != 0) return false;
-    if (c.get(3,7) != 3) return false;
-    if (c.get(4,7) != 4) return false;
-    if (c.get(5,7) != 5) return false;
-    return true;
+    if (c.get(2, 1) != 2) return false;
+    if (c.get(2, 3) != 2) return false;
+    if (c.get(2, 4) != 2) return false;
+    if (c.get(2, 5) != 2) return false;
+    if (c.get(2, 7) != 2) return false;
+    if (c.get(0, 7) != 0) return false;
+    if (c.get(3, 7) != 3) return false;
+    return c.get(4, 7) == 4 && c.get(5, 7) == 5;
   }
 
   private boolean bottomCorner1(Cube c) {
     if (!(bottomCross(c))) return false;
-    if (c.get(2,0) != 2) return false;
-    if (c.get(0,6) != 0) return false;
-    if (c.get(3,8) != 3) return false;
-    return true;
+    if (c.get(2, 0) != 2) return false;
+    return c.get(0, 6) == 0 && c.get(3, 8) == 3;
   }
 
   private boolean bottomCorner2(Cube c) {
     if (!(bottomCorner1(c))) return false;
-    if (c.get(2,2) != 2) return false;
-    if (c.get(0,8) != 0) return false;
-    if (c.get(4,6) != 4) return false;
-    return true;
+    if (c.get(2, 2) != 2) return false;
+    return c.get(0, 8) == 0 && c.get(4, 6) == 4;
   }
 
   private boolean bottomCorner3(Cube c) {
     if (!(bottomCorner2(c))) return false;
-    if (c.get(2,6) != 2) return false;
-    if (c.get(3,6) != 3) return false;
-    if (c.get(5,8) != 5) return false;
-    return true;
+    if (c.get(2, 6) != 2) return false;
+    return c.get(3, 6) == 3 && c.get(5, 8) == 5;
   }
 
   private boolean bottomCorner4(Cube c) {
     if (!(bottomCorner3(c))) return false;
-    if (c.get(2,8) != 2) return false;
-    if (c.get(4,8) != 4) return false;
-    if (c.get(5,6) != 5) return false;
-    return true;
+    if (c.get(2, 8) != 2) return false;
+    return c.get(4, 8) == 4 && c.get(5, 6) == 5;
   }
 
   ////// String manip ////////////////

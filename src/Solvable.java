@@ -2,7 +2,7 @@
  * Interface for different algorithms that solve an instance of Cube.
  * @author Matthew Meyer
  */
-public interface Solvable {
+interface Solvable {
   /**
    * A single solve method with a mixed Cube argument
    * @param cube An instance of a Cube
